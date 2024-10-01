@@ -12,6 +12,14 @@ export const typography = {
     fontSize: '16px',
     fontWeight: 'normal',
   },
+  bold: {
+    fontSize: '14px',
+    fontWeight: 600,
+  },
+  basic: {
+    fontSize: '12px',
+    fontWeight: 'normal',
+  },
   caption: {
     fontSize: '12px',
     fontWeight: 'normal',
