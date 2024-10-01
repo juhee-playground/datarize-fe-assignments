@@ -12,6 +12,7 @@ import { Actions, ErrorWrapper, ErrorText } from './Index.styles';
 
 export default function Dashboard() {
   const [customers, setCustomers] = useState<ICustomers[]>([]);
+  const [filteredCustomers, setFilteredCustomers] = useState<ICustomers[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isAsc, setIsAsc] = useState<boolean>(true);
@@ -23,6 +24,7 @@ export default function Dashboard() {
       const response = await getCustomers({});
 
       setCustomers(response);
+      setFilteredCustomers(response);
     } catch (e) {
       setErrorMessage((e as Error).message);
     } finally {
@@ -31,7 +33,12 @@ export default function Dashboard() {
   };
 
   const toggleSort = () => {
+    const sortedData = [...filteredCustomers].sort((a, b) => {
+      const compareValue = isAsc ? a.totalAmount - b.totalAmount : b.totalAmount - a.totalAmount;
+      return compareValue;
+    });
     setIsAsc(!isAsc);
+    setFilteredCustomers(sortedData);
   };
 
   useEffect(() => {
@@ -64,7 +71,7 @@ export default function Dashboard() {
               <ErrorText>{errorMessage}</ErrorText>
             </ErrorWrapper>
           ) : (
-            <OrderList loading={isLoading} items={customers} />
+            <OrderList loading={isLoading} items={filteredCustomers} />
           )}
         </WidgetCard>
       </div>
