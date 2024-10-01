@@ -6,21 +6,23 @@ import { getCustomerPurchaseDetails, getCustomers } from '@/api/customers';
 import WidgetCard from '@/components/common/Card/WidgetCard';
 import TextField from '@/components/common/Input/TextField';
 import Button from '@/components/common/Button';
+import useLockBodyScroll from '@/hooks/useLockBodyScroll';
 
 import OrderList from './OrderList';
 import { Actions, ErrorWrapper, ErrorText } from './Index.styles';
 import ModalDetails from './ModalDetails';
 
 export default function Dashboard() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [customers, setCustomers] = useState<ICustomers[]>([]);
   const [filteredCustomers, setFilteredCustomers] = useState<ICustomers[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isAsc, setIsAsc] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
-
   const [details, setDetails] = useState<ICustomerPurchaseDetails[]>([]);
+
+  useLockBodyScroll(isOpen);
 
   const fetchCustomers = async () => {
     try {
@@ -53,7 +55,7 @@ export default function Dashboard() {
   };
 
   const handleOnClick = (id: number) => {
-    setOpen(true);
+    setIsOpen(true);
     fetchCustomerDetails(id);
   };
 
@@ -111,12 +113,12 @@ export default function Dashboard() {
             <OrderList loading={isLoading} items={filteredCustomers} clickRow={handleOnClick} />
           )}
         </WidgetCard>
-        {open && (
+        {isOpen && (
           <ModalDetails
-            isLoading={false}
+            isLoading={isLoading}
             info={details}
             onClose={() => {
-              setOpen(false);
+              setIsOpen(false);
             }}
           />
         )}
