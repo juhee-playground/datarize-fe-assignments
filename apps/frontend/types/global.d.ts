@@ -1,5 +1,7 @@
 declare global {
   type TAlertType = 'success' | 'error' | 'warning' | 'info';
+  type TButtonType = 'button' | 'submit' | 'reset';
+  type TButtonVariant = 'text' | 'contained' | 'outlined' | 'fab';
 
   interface IErrorResponseData<T = unknown> {
     data?: T;
