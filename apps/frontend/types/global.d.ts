@@ -19,6 +19,14 @@ declare global {
     count: number;
     totalAmount: number;
   }
+
+  interface ICustomerPurchaseDetails {
+    date: string;
+    imgSrc: string;
+    price: number;
+    product: string;
+    quantity: number;
+  }
 }
 
 export {};
