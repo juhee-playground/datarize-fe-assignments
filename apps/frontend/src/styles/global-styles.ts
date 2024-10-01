@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import { normalize } from 'styled-normalize'
+import { colors } from './colors'
 
 const GlobalStyle = createGlobalStyle`
   ${normalize},
@@ -8,16 +9,17 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    color-scheme: light dark;    
+    color: ${colors.text.basic};
+    background-color: ${colors.primary};
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
 
-    --border-color:  #242424;
+    --border-color:  ${colors.border.darken};
     --white-text:  #fff;
     --balck-text:  #000;
     
@@ -28,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
   html { font-size: 100%; }
   body {
     font-size: 16px;
-    color: #242424;
+    color: ${colors.text.basic};
     width: 100%;
     height: calc(var(--vh, 1vh) * 100);
     margin: 0;
@@ -37,6 +39,16 @@ const GlobalStyle = createGlobalStyle`
     min-width: 320px;
     min-height: 100vh;
   }
+  
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(var(--vh, 1vh) * 100 - 56px);
+    gap: 0.5rem;
+  }
+
 
 
   
