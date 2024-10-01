@@ -1,4 +1,5 @@
 import Button from '@/components/common/Button';
+import Loading from '@/components/common/Loading';
 import { addCommasToNumber } from '@/utils/number';
 
 import * as S from './ModalDetails.styles';
@@ -23,9 +24,9 @@ export default function ModalDetails({ isLoading, info, onClose }: Props) {
             </Button>
           </S.Header>
           <S.Content>
-            {isLoading && <p>Loading...</p>}
+            {isLoading && <Loading />}
             <S.ListWrapper>
-              {info
+              {info.length !== 0
                 ? info.map((item, index) => {
                     const { date, imgSrc, price, product, quantity } = item;
                     return (
