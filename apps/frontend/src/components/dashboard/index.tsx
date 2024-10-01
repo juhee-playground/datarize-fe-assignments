@@ -116,7 +116,7 @@ export default function Dashboard() {
         {isOpen && (
           <ModalDetails
             isLoading={isLoading}
-            info={details}
+            items={details}
             onClose={() => {
               setIsOpen(false);
             }}
