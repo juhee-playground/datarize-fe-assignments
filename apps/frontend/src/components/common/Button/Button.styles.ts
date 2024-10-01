@@ -47,6 +47,7 @@ export const StyledButton = styled.button<{
   justify-content: center;
 
   height: 36px;
+  min-width: 104px;
 
   ${({ $variant }) => buttonStyles[$variant]}
 
