@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { colors } from '@/styles/colors';
+
 export const ModalWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -34,7 +36,7 @@ export const ModalScrollPaper = styled.div`
 `;
 
 export const Container = styled.div`
-  background-color: rgb(255, 255, 255);
+  background-color: ${colors.white};
   position: relative;
   overflow-y: auto;
   display: flex;
@@ -59,16 +61,16 @@ export const ListWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   list-style: none;
+  gap: 4px;
 `;
 
 export const ListItem = styled.li`
   display: flex;
   align-items: center;
+  justify-content: space-around;
   gap: 12px;
-`;
 
-export const InfoContainer = styled.div`
-  display: flex;
-  column-gap: 48px;
-  margin: 12px;
+  span {
+    min-width: 100px;
+  }
 `;
