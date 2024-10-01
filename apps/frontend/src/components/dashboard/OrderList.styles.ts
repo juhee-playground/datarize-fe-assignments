@@ -7,6 +7,7 @@ export const ListContainer = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  overflow-y: scroll;
 `;
 
 export const Item = styled.li`

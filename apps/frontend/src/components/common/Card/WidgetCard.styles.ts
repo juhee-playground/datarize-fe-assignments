@@ -11,6 +11,7 @@ export const Container = styled.div`
   gap: 12px;
 
   width: 50%;
+  max-height: 84vh;
 `;
 
 export const Header = styled.div`
