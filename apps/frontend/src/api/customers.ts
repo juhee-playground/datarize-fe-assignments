@@ -1,4 +1,4 @@
-import fetchAPI from '../utils/api';
+import fetchAPI from '@/utils/api';
 
 const API_URL = '/customers';
 
@@ -19,4 +19,8 @@ export const getCustomers = ({ sort, name }: IGetCustomersParams): Promise<ICust
   }
 
   return fetchAPI<ICustomers[]>(`${API_URL}?${params.toString()}`);
+};
+
+export const getCustomerPurchaseDetails = (id: number): Promise<ICustomerPurchaseDetails[]> => {
+  return fetchAPI<ICustomerPurchaseDetails[]>(`${API_URL}/${id}/purchases`);
 };
