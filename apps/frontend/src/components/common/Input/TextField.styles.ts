@@ -2,18 +2,16 @@ import styled from 'styled-components';
 
 import { colors } from '@/styles/colors';
 
-export const TextFieldWrapper = styled.div`
-  /* width: 100%; */
-`;
+export const TextFieldWrapper = styled.div``;
 
-export const InputContainer = styled.div<{ iconPosition?: 'preffix' | 'suffix' }>`
+export const InputContainer = styled.div<{ $iconPosition?: 'preffix' | 'suffix' }>`
   display: flex;
   background-color: ${colors.white};
   margin-bottom: 0;
   border-radius: 8px;
   width: 100%;
   position: relative;
-  flex-flow: ${({ iconPosition }) => (iconPosition === 'suffix' ? 'row-reverse' : 'row')};
+  flex-flow: ${({ $iconPosition }) => ($iconPosition === 'suffix' ? 'row-reverse' : 'row')};
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 `;
 

@@ -16,6 +16,7 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isAsc, setIsAsc] = useState<boolean>(true);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const fetchData = async () => {
     try {
@@ -30,6 +31,12 @@ export default function Dashboard() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    const filteredData = customers.filter(customer => customer.name.toLowerCase().includes(query.toLowerCase()));
+    setFilteredCustomers(filteredData);
   };
 
   const toggleSort = () => {
@@ -55,7 +62,15 @@ export default function Dashboard() {
       >
         <WidgetCard>
           <Actions>
-            <TextField placeholder='이름 검색' isIcon icon={<SearchOutlined />} iconPosition='preffix' />
+            <TextField
+              placeholder='이름 검색'
+              isIcon
+              icon={<SearchOutlined />}
+              iconPosition='preffix'
+              value={searchQuery}
+              onChange={handleSearch}
+              onEnterKeyPress={handleSearch}
+            />
             <Button
               variant='outlined'
               color='black'
