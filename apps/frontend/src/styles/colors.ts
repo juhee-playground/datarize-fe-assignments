@@ -9,6 +9,9 @@ export const colors = {
     color: '#999999',
     backgroundColor: '#f0f0f0',
   },
+  background: {
+    basic: '#f5f5f5',
+  },
   border: {
     basic: '#efefef',
     darken: '#cccccc',
@@ -38,4 +41,4 @@ export const colors = {
     default: '#bdbdbd',
     lighter: '#f8f9fa',
   },
-}
+};

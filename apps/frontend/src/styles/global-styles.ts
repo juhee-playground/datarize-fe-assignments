@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
-import { normalize } from 'styled-normalize'
-import { colors } from './colors'
+import { createGlobalStyle } from 'styled-components';
+import { normalize } from 'styled-normalize';
+import { colors } from './colors';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize},
@@ -88,7 +88,6 @@ const GlobalStyle = createGlobalStyle`
     border-color: var(--border-color, currentColor)
   }
 
-  // input
   input {
     display: block;
     box-sizing: border-box;
@@ -96,7 +95,7 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 4px;
     border: 1px solid #dddddd;
     padding: 10px 15px;
-    margin-bottom: 4px;
+    margin-bottom: 0;
     font-size: 14px;
 
   }
@@ -134,6 +133,6 @@ const GlobalStyle = createGlobalStyle`
     -webkit-appearance: none;
   }
 
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
