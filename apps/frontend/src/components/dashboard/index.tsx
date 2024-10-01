@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react';
 
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 
-import { getCustomers } from '@/api/customer';
+import { getCustomerPurchaseDetails, getCustomers } from '@/api/customers';
 import WidgetCard from '@/components/common/Card/WidgetCard';
 import TextField from '@/components/common/Input/TextField';
 import Button from '@/components/common/Button';
 
 import OrderList from './OrderList';
 import { Actions, ErrorWrapper, ErrorText } from './Index.styles';
+import ModalDetails from './ModalDetails';
 
 export default function Dashboard() {
+  const [open, setOpen] = useState(false);
   const [customers, setCustomers] = useState<ICustomers[]>([]);
   const [filteredCustomers, setFilteredCustomers] = useState<ICustomers[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -18,7 +20,9 @@ export default function Dashboard() {
   const [isAsc, setIsAsc] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const fetchData = async () => {
+  const [details, setDetails] = useState<ICustomerPurchaseDetails[]>([]);
+
+  const fetchCustomers = async () => {
     try {
       setIsLoading(true);
 
@@ -48,8 +52,26 @@ export default function Dashboard() {
     setFilteredCustomers(sortedData);
   };
 
+  const handleOnClick = (id: number) => {
+    setOpen(true);
+    fetchCustomerDetails(id);
+  };
+
+  const fetchCustomerDetails = async (id: number) => {
+    try {
+      setIsLoading(true);
+
+      const response = await getCustomerPurchaseDetails(id);
+      setDetails(response);
+    } catch (e) {
+      setErrorMessage((e as Error).message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchCustomers();
   }, []);
 
   return (
@@ -86,9 +108,18 @@ export default function Dashboard() {
               <ErrorText>{errorMessage}</ErrorText>
             </ErrorWrapper>
           ) : (
-            <OrderList loading={isLoading} items={filteredCustomers} />
+            <OrderList loading={isLoading} items={filteredCustomers} clickRow={handleOnClick} />
           )}
         </WidgetCard>
+        {open && (
+          <ModalDetails
+            isLoading={false}
+            info={details}
+            onClose={() => {
+              setOpen(false);
+            }}
+          />
+        )}
       </div>
     </>
   );
