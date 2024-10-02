@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+
 import { colors } from './colors';
 
 const GlobalStyle = createGlobalStyle`
@@ -11,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 
     color-scheme: light dark;    
     color: ${colors.text.basic};
-    background-color: ${colors.primary};
+    background-color: ${colors.white};
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -49,6 +50,15 @@ const GlobalStyle = createGlobalStyle`
     gap: 0.5rem;
   }
 
+  a {
+    font-weight: 500;
+    color: ${colors.primaryDarken};
+    text-decoration: inherit;
+  }
+
+  a:hover {
+    color: ${colors.primaryDarkenHover};
+  }
 
 
   
