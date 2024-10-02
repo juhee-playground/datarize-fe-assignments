@@ -1,10 +1,11 @@
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 
-import MainLayout from '@/components/layout/Main'
-import Router from '@/router'
-import GlobalStyle from '@/styles/global-styles'
+import Alert from '@/components/common/Alert';
+import MainLayout from '@/components/layout/Main';
+import Router from '@/router';
+import GlobalStyle from '@/styles/global-styles';
 
-import './App.css'
+import './App.css';
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
       <MainLayout>
         <Router />
       </MainLayout>
+      <Alert />
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
