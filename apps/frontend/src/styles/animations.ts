@@ -38,3 +38,12 @@ export const dotPulse = keyframes`
     opacity: 0.7;
   }
 `;
+
+export const progressLiner = keyframes`
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+`;
