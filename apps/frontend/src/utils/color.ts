@@ -1,5 +1,10 @@
 import { colors } from '@/styles/colors';
 
+const RED_LUMINANCE_WEIGHT = 299;
+const GREEN_LUMINANCE_WEIGHT = 587;
+const BLUE_LUMINANCE_WEIGHT = 114;
+const LUMINANCE_WEIGHT_SUM = RED_LUMINANCE_WEIGHT + GREEN_LUMINANCE_WEIGHT + BLUE_LUMINANCE_WEIGHT; // 가중치 합계 상수
+
 export const darkenColor = (color: string, amount: number) => {
   const [r, g, b] = color.match(/\w\w/g)!.map(c => parseInt(c, 16));
   return `rgb(${Math.max(0, r - amount)}, ${Math.max(0, g - amount)}, ${Math.max(0, b - amount)})`;
@@ -7,7 +12,8 @@ export const darkenColor = (color: string, amount: number) => {
 
 export const getBrightness = (color: string) => {
   const [r, g, b] = color.match(/\w\w/g)!.map(c => parseInt(c, 16));
-  return (r * 299 + g * 587 + b * 114) / 1000;
+  // 인간의 눈이 색상을 인식하는 방식에 따라 각각의 가중치를 부여한 것
+  return (r * RED_LUMINANCE_WEIGHT + g * GREEN_LUMINANCE_WEIGHT + b * BLUE_LUMINANCE_WEIGHT) / LUMINANCE_WEIGHT_SUM;
 };
 
 export const getCustomColor = (color?: string) => {
@@ -30,7 +36,7 @@ export const getCustomColor = (color?: string) => {
   }
 };
 
-export const hexToRgb = (hex: string) => {
+const hexToRgb = (hex: string) => {
   let r = 0,
     g = 0,
     b = 0;
