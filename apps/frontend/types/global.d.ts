@@ -6,6 +6,7 @@ declare global {
 
   interface IErrorResponseData<T = unknown> {
     data?: T;
+    error?: string;
     message?: string;
     status?: string;
   }

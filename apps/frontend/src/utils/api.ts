@@ -1,18 +1,12 @@
 import useAlertStore from '@/store/useAlertStore';
 
 const SERVER_ADDRESS = 'http://localhost:4000/api';
-const ALERT_DURATION = 5000;
-
-const logOnDev = (message: string) => {
-  if (import.meta.env.VITE_APP_NODE_ENV === 'dev') {
-    console.log(message);
-  }
-};
+const ALERT_DURATION = 2000;
 
 function handleError<T>(serverError: IErrorResponseData<T>) {
-  if (serverError?.message) {
+  if (serverError?.error) {
     const openAlert = useAlertStore.getState().openAlert;
-    openAlert('error', serverError.message, ALERT_DURATION);
+    openAlert('error', serverError.error, ALERT_DURATION);
   }
 }
 
@@ -48,15 +42,21 @@ async function fetchAPI<T>(endpoint: string, options: RequestInit = {}, params?:
   try {
     const response = await fetch(url, fetchOptions);
 
-    logOnDev(`🚀 [API] ${fetchOptions.method?.toUpperCase()} ${url} | Response ${response.status}`);
-
     if (!response.ok) {
       const errorData: IErrorResponseData<T> = await response.json();
-      handleError(errorData);
 
-      throw new Error(errorData.message || 'An unknown error occurred');
+      if (errorData.error) {
+        handleError(errorData);
+        const error = new Error(errorData.error || 'An unknown error occurred') as Error & {
+          errorData?: IErrorResponseData<T>;
+        };
+        error.errorData = errorData;
+        throw error;
+      } else {
+        // errorData.error가 없으면 예외를 던짐
+        throw new Error(errorData.message || 'An unknown error occurred');
+      }
     }
-
     return response.json() as Promise<T>;
   } catch (error) {
     const openAlert = useAlertStore.getState().openAlert;
