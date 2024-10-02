@@ -16,11 +16,26 @@ function handleError<T>(serverError: IErrorResponseData<T>) {
   }
 }
 
-async function fetchAPI<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-  const url = `${SERVER_ADDRESS}${endpoint}`;
+async function fetchAPI<T>(endpoint: string, options: RequestInit = {}, params?: TFetchParams): Promise<T> {
+  let url = `${SERVER_ADDRESS}${endpoint}`;
   const defaultHeaders = {
     'Content-Type': 'application/json',
   };
+
+  if (params) {
+    const queryParams = new URLSearchParams(
+      Object.entries(params).reduce(
+        (acc, [key, value]) => {
+          if (value !== undefined) {
+            acc[key] = String(value);
+          }
+          return acc;
+        },
+        {} as Record<string, string>,
+      ),
+    ).toString();
+    url += `?${queryParams}`;
+  }
 
   const fetchOptions: RequestInit = {
     ...options,

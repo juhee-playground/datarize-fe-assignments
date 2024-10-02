@@ -3,20 +3,13 @@ import fetchAPI from '@/utils/api';
 const API_URL = '/purchase-frequency';
 
 interface IGetPurchaseParams {
-  from?: Date;
-  to?: Date;
+  from: Date;
+  to: Date;
 }
 
-export const getPurchaseData = ({ from, to }: IGetPurchaseParams): Promise<any> => {
-  const params = new URLSearchParams();
+export const getPurchaseData = ({ from, to }: IGetPurchaseParams): Promise<IPurchaseData[]> => {
+  const isoFrom = from.toISOString();
+  const isoTo = to.toISOString();
 
-  if (from) {
-    params.append('from', from.toISOString());
-  }
-
-  if (to) {
-    params.append('to', to.toISOString());
-  }
-
-  return fetchAPI<any>(`${API_URL}?${params.toString()}`);
+  return fetchAPI<IPurchaseData[]>(`${API_URL}`, {}, { from: isoFrom, to: isoTo });
 };
