@@ -1,6 +1,8 @@
 import { ResponsiveBar } from '@nivo/bar';
 
 import Loading from '@/components/common/Loading';
+import { colors } from '@/styles/colors';
+import { addCommasToNumber } from '@/utils/number';
 
 interface IBarChartsProps {
   data: IPurchaseData[];
@@ -24,28 +26,31 @@ const BarChart = ({ data, loading }: IBarChartsProps) => {
         indexBy='range'
         margin={{ top: 10, right: 50, bottom: 50, left: 120 }}
         padding={0.3}
-        layout='horizontal' // 수평 바 차트로 설정
-        colors={{ scheme: 'category10' }}
+        layout='horizontal'
+        colors={colors.primary}
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: '판매 갯수',
-          legendPosition: 'middle',
-          legendOffset: 40,
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: '가격 범위',
-          legendPosition: 'middle',
-          legendOffset: -100,
+          format: value => {
+            if (typeof value === 'string') {
+              const [start, end] = value.split(' - ');
+              const formattedStart = addCommasToNumber(Number(start));
+              const formattedEnd = addCommasToNumber(Number(end));
+              return `₩${formattedStart} - ₩${formattedEnd}`;
+            }
+            return value;
+          },
         }}
         axisTop={null}
         labelSkipWidth={12}
         labelSkipHeight={12}
-        labelTextColor='#ffffff'
+        labelTextColor={colors.text.basic}
         legends={[]}
       />
     </div>
