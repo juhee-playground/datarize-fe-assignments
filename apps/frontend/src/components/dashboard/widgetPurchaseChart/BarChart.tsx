@@ -1,13 +1,21 @@
 import { ResponsiveBar } from '@nivo/bar';
 
+import Loading from '@/components/common/Loading';
+
 interface IBarChartsProps {
   data: IPurchaseData[];
+  loading: boolean;
 }
 
-const BarChart = ({ data }: IBarChartsProps) => {
+const BarChart = ({ data, loading }: IBarChartsProps) => {
   if (!data || data.length === 0) {
     return <div>데이터가 없습니다.</div>;
   }
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div style={{ height: 400 }}>
       <ResponsiveBar

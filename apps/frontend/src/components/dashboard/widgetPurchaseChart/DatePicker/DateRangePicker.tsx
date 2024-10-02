@@ -6,14 +6,14 @@ import { Container, DateInput, Label, Separator, PickerGroup, PickerContainer } 
 import { handleDateChange } from './util';
 
 interface IDateRangePickerProps {
-  startValue: Date | null;
-  endValue: Date | null;
+  from: Date | null;
+  to: Date | null;
   onChange: (startDate: Date, endDate: Date) => void;
 }
 
-const DateRangePicker = ({ startValue, endValue, onChange }: IDateRangePickerProps) => {
-  const [startDate, setStartDate] = useState<string>(startValue ? dayjs(startValue).format('YYYY-MM-DD') : '');
-  const [endDate, setEndDate] = useState<string>(endValue ? dayjs(endValue).format('YYYY-MM-DD') : '');
+const DateRangePicker = ({ from, to, onChange }: IDateRangePickerProps) => {
+  const [startDate, setStartDate] = useState<string>(from ? dayjs(from).format('YYYY-MM-DD') : '');
+  const [endDate, setEndDate] = useState<string>(to ? dayjs(to).format('YYYY-MM-DD') : '');
 
   return (
     <Container>
