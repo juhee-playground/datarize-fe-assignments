@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
+
 import { StyledButton } from './Button.styles';
 
-type ButtonProps = {
+interface IButtonProps {
   children: ReactNode;
   type?: TButtonType;
   variant?: TButtonVariant;
@@ -11,7 +12,7 @@ type ButtonProps = {
   autoFocus?: boolean;
   block?: boolean;
   onClick?: () => void;
-};
+}
 
 export default function Button({
   children,
@@ -23,7 +24,7 @@ export default function Button({
   selected,
   autoFocus = false,
   onClick,
-}: ButtonProps) {
+}: IButtonProps) {
   return (
     <StyledButton
       type={type}

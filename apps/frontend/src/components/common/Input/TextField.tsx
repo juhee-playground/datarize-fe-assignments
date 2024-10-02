@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+
 import { TextFieldWrapper, InputLabel, InputContainer, InputIcon, StyledInput } from './TextField.styles';
 
-type IProps = {
+interface ITextFieldProps {
   label?: string;
   placeholder?: string;
   isIcon?: boolean;
@@ -10,7 +11,7 @@ type IProps = {
   value?: string | number | undefined;
   onChange?: (query: string) => void;
   onEnterKeyPress?: (query: string) => void;
-};
+}
 
 export default function TextField({
   label,
@@ -21,7 +22,7 @@ export default function TextField({
   value = '',
   onChange,
   onEnterKeyPress,
-}: IProps) {
+}: ITextFieldProps) {
   const [inputValue, setInputValue] = useState<string>(value as string);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

@@ -1,17 +1,17 @@
 import Button from '@/components/common/Button';
-import Loading from '@/components/common/Loading';
 import ImageBox from '@/components/common/ImageBox';
+import Loading from '@/components/common/Loading';
 import { addCommasToNumber } from '@/utils/number';
 
 import * as S from './ModalDetails.styles';
 
-interface Props {
+interface IModalProps {
   isLoading: boolean;
   items: ICustomerPurchaseDetails[];
   onClose: () => void;
 }
 
-export default function ModalDetails({ isLoading, items, onClose }: Props) {
+export default function ModalDetails({ isLoading, items, onClose }: IModalProps) {
   return (
     <S.ModalWrapper>
       <S.Overlay onClick={onClose}></S.Overlay>

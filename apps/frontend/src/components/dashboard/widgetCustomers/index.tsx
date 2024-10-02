@@ -1,30 +1,28 @@
 import { useEffect, useState } from 'react';
+
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 
 import { getCustomerPurchaseDetails, getCustomers } from '@/api/customers';
+import Button from '@/components/common/Button';
 import WidgetCard from '@/components/common/Card/WidgetCard';
 import TextField from '@/components/common/Input/TextField';
-import Button from '@/components/common/Button';
+import ModalDetails from '@/components/dashboard/widgetCustomers/ModalDetails';
+import OrderList from '@/components/dashboard/widgetCustomers/OrderList';
 import useLockBodyScroll from '@/hooks/useLockBodyScroll';
-import OrderList from './OrderList';
-import ModalDetails from './ModalDetails';
+
 import { Actions, ErrorWrapper, ErrorText } from './Index.styles';
 
 const WidgetCustomersContainer = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [customers, setCustomers] = useState<ICustomers[]>([]);
-  const [filteredCustomers, setFilteredCustomers] = useState<ICustomers[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isAsc, setIsAsc] = useState<boolean>(true);
-  const [searchQuery, setSearchQuery] = useState<string>('');
   const [details, setDetails] = useState<ICustomerPurchaseDetails[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [filteredCustomers, setFilteredCustomers] = useState<ICustomers[]>([]);
+  const [isAsc, setIsAsc] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useLockBodyScroll(isOpen);
-
-  useEffect(() => {
-    fetchCustomers();
-  }, []);
 
   const fetchCustomers = async () => {
     try {
@@ -54,11 +52,6 @@ const WidgetCustomersContainer = () => {
     setFilteredCustomers(sortedData);
   };
 
-  const handleOnClick = (id: number) => {
-    setIsOpen(true);
-    fetchCustomerDetails(id);
-  };
-
   const fetchCustomerDetails = async (id: number) => {
     try {
       setIsLoading(true);
@@ -70,6 +63,15 @@ const WidgetCustomersContainer = () => {
       setIsLoading(false);
     }
   };
+
+  const handleOnClick = (id: number) => {
+    setIsOpen(true);
+    fetchCustomerDetails(id);
+  };
+
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
 
   return (
     <WidgetCard>
