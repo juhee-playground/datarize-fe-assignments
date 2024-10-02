@@ -1,4 +1,5 @@
 declare global {
+  type TFetchParams = Record<string, string | number | boolean | undefined>;
   type TAlertType = 'success' | 'error' | 'warning' | 'info';
   type TButtonType = 'button' | 'submit' | 'reset';
   type TButtonVariant = 'text' | 'contained' | 'outlined' | 'fab';
@@ -26,6 +27,12 @@ declare global {
     price: number;
     product: string;
     quantity: number;
+  }
+
+  interface IPurchaseData {
+    range: string;
+    count: number;
+    [key: string]: string | number;
   }
 }
 
