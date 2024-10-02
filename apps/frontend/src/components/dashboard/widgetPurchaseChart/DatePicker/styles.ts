@@ -8,6 +8,7 @@ export const Container = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
   padding: 0 24px;
 `;
 
