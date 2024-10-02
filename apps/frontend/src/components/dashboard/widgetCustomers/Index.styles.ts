@@ -6,6 +6,7 @@ import { typography } from '@/styles/typography';
 export const Actions = styled.div<{ iconPosition?: 'preffix' | 'suffix' }>`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const ErrorWrapper = styled.div`
@@ -16,5 +17,5 @@ export const ErrorWrapper = styled.div`
 
 export const ErrorText = styled.p`
   color: red;
-  font-size: ${typography.basic};
+  ${typography.basic};
 `;

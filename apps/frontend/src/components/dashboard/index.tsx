@@ -1,14 +1,13 @@
 import WidgetCustomersContainer from './widgetCustomers';
+import WidgetPurchaseContainer from './widgetPurchaseChart';
+
+import { Container } from './Index.styles';
 
 export default function Dashboard() {
   return (
-    <div
-      style={{
-        width: '100%',
-        whiteSpace: 'pre-line',
-      }}
-    >
+    <Container>
+      <WidgetPurchaseContainer />
       <WidgetCustomersContainer />
-    </div>
+    </Container>
   );
 }

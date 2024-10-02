@@ -37,9 +37,8 @@ export const StyledButton = styled.button<{
 }>`
   border-radius: 4px;
   padding: 0.5em 0.8em;
-  font-size: ${typography.body.fontSize};
-  font-weight: ${typography.body.fontWeight};
-  font-family: ${typography.fontFamily};
+  ${typography.body};
+  ${typography.fontFamily};
   cursor: pointer;
   transition: background-color 0.25s;
 

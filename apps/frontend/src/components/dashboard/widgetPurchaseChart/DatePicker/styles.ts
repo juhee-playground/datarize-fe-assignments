@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
+import { colors } from '@/styles/colors';
+import { typography } from '@/styles/typography';
+
 export const Container = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 2px;
   align-items: center;
+  gap: 8px;
+  padding: 0 24px;
 `;
 
 export const PickerGroup = styled.div`
@@ -23,17 +27,18 @@ export const PickerContainer = styled.div`
 
 export const DateInput = styled.input`
   padding: 8px;
-  font-size: 16px;
+  ${typography.body};
 `;
 
 export const TimeInput = styled.input`
   padding: 8px;
-  font-size: 16px;
+  ${typography.body};
 `;
 
 export const Label = styled.label`
   display: block;
-  color: #666666;
+  color: ${colors.text.basic};
+  ${typography.basic};
 `;
 
 export const Separator = styled.span`

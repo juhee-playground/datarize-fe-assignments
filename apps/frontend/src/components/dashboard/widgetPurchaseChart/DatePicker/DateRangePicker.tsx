@@ -18,7 +18,7 @@ const DateRangePicker = ({ startValue, endValue, onChange }: IDateRangePickerPro
   return (
     <Container>
       <PickerGroup>
-        <Label>Start Date</Label>
+        <Label>시작날짜</Label>
         <PickerContainer>
           <DateInput
             type='date'
@@ -30,7 +30,7 @@ const DateRangePicker = ({ startValue, endValue, onChange }: IDateRangePickerPro
       </PickerGroup>
       <Separator>~</Separator>
       <PickerGroup>
-        <Label>End Date</Label>
+        <Label>종료날짜</Label>
         <PickerContainer>
           <DateInput
             type='date'
