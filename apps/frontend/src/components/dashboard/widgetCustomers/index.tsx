@@ -16,7 +16,6 @@ const WidgetCustomersContainer = () => {
   const [customers, setCustomers] = useState<ICustomers[]>([]);
   const [details, setDetails] = useState<ICustomerPurchaseDetails[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [filteredCustomers, setFilteredCustomers] = useState<ICustomers[]>([]);
   const [isAsc, setIsAsc] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -24,12 +23,13 @@ const WidgetCustomersContainer = () => {
 
   useLockBodyScroll(isOpen);
 
-  const fetchCustomers = async () => {
+  const fetchCustomers = async (query?: string, sortOption?: string) => {
     try {
       setIsLoading(true);
-      const response = await getCustomers({});
+      const response = await getCustomers({ name: query, sort: sortOption });
+      console.log(response);
       setCustomers(response);
-      setFilteredCustomers(response);
+      setErrorMessage(null);
     } catch (e) {
       setErrorMessage((e as Error).message);
     } finally {
@@ -39,17 +39,13 @@ const WidgetCustomersContainer = () => {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    const filteredData = customers.filter(customer => customer.name.toLowerCase().includes(query.toLowerCase()));
-    setFilteredCustomers(filteredData);
+    fetchCustomers(query, isAsc ? 'asc' : 'desc');
   };
 
   const toggleSort = () => {
-    const sortedData = [...filteredCustomers].sort((a, b) => {
-      const compareValue = isAsc ? a.totalAmount - b.totalAmount : b.totalAmount - a.totalAmount;
-      return compareValue;
-    });
+    const sortOption = isAsc ? 'desc' : 'asc';
     setIsAsc(!isAsc);
-    setFilteredCustomers(sortedData);
+    fetchCustomers(searchQuery, sortOption);
   };
 
   const fetchCustomerDetails = async (id: number) => {
@@ -100,7 +96,7 @@ const WidgetCustomersContainer = () => {
           <ErrorText>{errorMessage}</ErrorText>
         </ErrorWrapper>
       ) : (
-        <OrderList loading={isLoading} items={filteredCustomers} clickRow={handleOnClick} />
+        <OrderList loading={isLoading} items={customers} clickRow={handleOnClick} />
       )}
       {isOpen && <ModalDetails isLoading={isLoading} items={details} onClose={() => setIsOpen(false)} />}
     </WidgetCard>

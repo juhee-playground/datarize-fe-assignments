@@ -8,17 +8,17 @@ interface IGetCustomersParams {
 }
 
 export const getCustomers = ({ sort, name }: IGetCustomersParams): Promise<ICustomers[]> => {
-  const params = new URLSearchParams();
+  const params: Record<string, string | undefined> = {};
 
   if (sort) {
-    params.append('sortBy', sort);
+    params.sortBy = sort;
   }
 
-  if (name !== undefined) {
-    params.append('name', name);
+  if (name) {
+    params.name = name;
   }
 
-  return fetchAPI<ICustomers[]>(`${API_URL}?${params.toString()}`);
+  return fetchAPI<ICustomers[]>(`${API_URL}`, {}, params);
 };
 
 export const getCustomerPurchaseDetails = (id: number): Promise<ICustomerPurchaseDetails[]> => {
